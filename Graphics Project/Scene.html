@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="Stylesheet" href="style.css">
+  <script src="jquery.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <canvas id="can" width="1350px" height="900" ;></canvas>
+
+    <div class="animal">
+      <img src="/photo/cow4.gif" width="120" height="150">
+    </div>
+    <div class="animal2">
+      <img src="/photo/cow.gif" width="90px" height="100px">
+    </div>
+    <div class="animal3">
+      <img src="/photo/got.gif" width="80px" height="100">
+    </div>
+    <div class="boy">
+      <img src="/photo/runnng boy.gif" width="120px" height="150px">
+    </div>
+    <div class="tree">
+      <img src="/photo/tree1.gif" width="150px" height="240px">
+    </div>
+    <div class="hen">
+      <img src="/photo/hen.webp" width="80px" height="90px">
+    </div>
+    <div class="plant">
+      <img src="/photo/grass2.gif" width="80px" height="90px">
+    </div>
+
+    <div class="grass">
+      <img src="/photo/grass.gif" width="180px" height="180px">
+      <img src="/photo/grass.gif" width="180px" height="180px">
+      <img src="/photo/grass.gif" width="180px" height="180px">
+      <img src="/photo/grass.gif" width="180px" height="180px">
+      <img src="/photo/grass.gif" width="180px" height="180px">
+      <img src="/photo/grass.gif" width="180px" height="180px">
+      <img src="/photo/grass.gif" width="180px" height="180px">
+    </div>
+    <div class="road">
+
+      <div id="myHorse" class="horse">
+        <img src="/photo/horse.gif" width="180px" height="200px">
+      </div>
+    </div>
+    <script>
+      function move_horse(direction) {
+        var horse = document.getElementById("myHorse");
+        var x = parseInt(horse.style.left) || 0;
+        var y = parseInt(horse.style.top) || 0;
+        var distance = 10; // adjust the distance as needed
+        var maxLeft = window.innerWidth - horse.offsetWidth; // calculate the maximum left position
+        if (direction == 'left') {
+          x += distance;
+          if (x > maxLeft) { // if the horse reaches the maximum left position, turn it around
+            x = maxLeft;
+            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(180deg)";
+          } else {
+            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(0deg)";
+          }
+        }
+        else if (direction == 'right') {
+          x -= distance;
+          if (x < 0) { // if the horse reaches the minimum left position, turn it around
+            x = 0;
+            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(0deg)";
+          } else {
+            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(180deg)";
+          }
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      var all = document.getElementById("can");
+      var scene = all.getContext("2d");
+
+      scene.rect(0, 0, 1474, 500);
+      scene.fillStyle = "lightblue";
+      scene.strokeStyle = "lightblue";
+      scene.fill();
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(250, 90, 20, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(360, 70, 30, 0, 2 * Math.PI);
+      scene.fill();
+      scene.stroke();
+
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(400, 70, 40, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(435, 70, 30, 0, 2 * Math.PI);
+      scene.fill();
+      scene.stroke();
+
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(560, 110, 30, 0, 2 * Math.PI);
+      scene.fill();
+      scene.stroke();
+
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(600, 110, 40, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(635, 110, 30, 0, 2 * Math.PI);
+      scene.fill();
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(730, 70, 20, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "yellow";
+      scene.arc(950, 110, 60, 0, 2 * Math.PI);
+      scene.fill();
+      scene.stroke();
+
+      var all = document.getElementById("can");
+      var mount = all.getContext("2d");
+
+      mount.beginPath();
+      mount.moveTo(0, 500);
+      mount.strokeStyle = "rgb(29, 14, 6)";
+      mount.quadraticCurveTo(180, 190, 350, 500);
+      mount.fillStyle = "rgb(29, 14, 6)";
+      mount.fill();
+
+
+      mount.beginPath();
+      mount.moveTo(230, 500);
+      mount.quadraticCurveTo(550, -10, 900, 500);
+      mount.fillStyle = "rgb(29, 14, 6)";
+      mount.fill();
+
+      mount.beginPath();
+      mount.moveTo(700, 500);
+      mount.strokeStyle = "rgb(29, 14, 6)";
+      mount.quadraticCurveTo(1180, 190, 1300, 500);
+      mount.fillStyle = "rgb(29, 14, 6)";
+      mount.fill();
+
+      mount.stroke();
+
+      var all = document.getElementById("can");
+      var land = all.getContext("2d");
+
+      land.beginPath();
+      land.strokeStyle = "green";
+      land.moveTo(0, 500);
+      land.quadraticCurveTo(5, 360, 280, 300);
+
+      land.beginPath();
+      land.moveTo(0, 500);
+      land.quadraticCurveTo(970, 250, 1430, 500);
+      land.fillStyle = "green";
+      land.fill();
+      land.stroke();
+
+      land.beginPath();
+      land.rect(0, 500, 1400, 500);
+      land.fillStyle = "green";
+      land.fill();
+      land.stroke();
+
+      land.beginPath();
+      land.fillStyle = "#873e23";
+      land.lineWidth = "1";
+      land.strokeStyle = "black";
+      land.moveTo(100, 550);
+      land.lineTo(250, 450);
+      land.lineTo(380, 550);
+      land.fill();
+
+      land.beginPath();
+      land.rect(130, 550, 220, 120);
+      land.fillStyle = "#f9d589";
+      land.fill();
+
+      land.beginPath();
+      land.rect(215, 610, 50, 60);
+      land.fillStyle = "black";
+      land.fill();
+
+      land.beginPath();
+      land.arc(255, 640, 5, 0, 2 * Math.PI);
+      land.fillStyle = "red";
+      land.fill();
+      land.stroke();
+
+
+      land.beginPath();
+      land.rect(0, 950, 1300, 200);
+      land.fillStyle = "#d96630";
+      land.strokeStyle = "#d96630";
+      land.fill();
+      land.stroke();
+      var canvas = document.getElementById("can");
+      var ctx = canvas.getContext("2d");
+
+      ctx.beginPath();
+      ctx.moveTo(775, 500);
+      ctx.lineTo(775, 380);
+      ctx.lineTo(783, 380);
+      ctx.lineTo(787, 500);
+      ctx.closePath();
+      ctx.fillStyle = "#e95d2a ";
+      ctx.fill();
+      ctx.stroke();
+
+
+      ctx.beginPath();
+      ctx.moveTo(75, 380);
+      ctx.quadraticCurveTo(65, 350, 10, 340);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(72, 380);
+      ctx.quadraticCurveTo(45, 370, 10, 340);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(72, 380);
+      ctx.quadraticCurveTo(45, 370, 10, 340);
+      ctx.fillStyle = "";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(72, 385);
+      ctx.quadraticCurveTo(35, 355, 10, 395);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(82, 390);
+      ctx.quadraticCurveTo(100, 355, 145, 400);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
+
+
+
+      ctx.beginPath();
+      ctx.moveTo(78, 380);
+      ctx.quadraticCurveTo(135, 350, 155, 385);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(76, 380);
+      ctx.quadraticCurveTo(95, 320, 160, 340);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(80, 380);
+      ctx.quadraticCurveTo(78, 320, 25, 320);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
+
+      // var canvas = document.getElementById("can");
+      // var ctx = canvas.getContext("2d");
+
+      // ctx.beginPath();
+      // ctx.moveTo(75, 500);
+      // ctx.lineTo(75, 380);
+      // ctx.lineTo(83, 380);
+      // ctx.lineTo(87, 500);
+      // ctx.closePath();
+      // ctx.fillStyle = "#e95d2a ";
+      // ctx.fill();
+      // ctx.stroke();
+
+
+      // ctx.beginPath();
+      // ctx.moveTo(75, 380);
+      // ctx.quadraticCurveTo(65, 350, 10, 340);
+      // ctx.fillStyle = "green";
+      // ctx.fill();
+      // ctx.stroke();
+
+      // ctx.beginPath();
+      // ctx.moveTo(72, 380);
+      // ctx.quadraticCurveTo(45, 370, 10, 340);
+      // ctx.fillStyle = "green";
+      // ctx.fill();
+      // ctx.stroke();
+
+      // ctx.beginPath();
+      // ctx.moveTo(72, 380);
+      // ctx.quadraticCurveTo(45, 370, 10, 340);
+      // ctx.fillStyle = "";
+      // ctx.fill();
+      // ctx.stroke();
+
+      // ctx.beginPath();
+      // ctx.moveTo(72, 385);
+      // ctx.quadraticCurveTo(35, 355, 10, 395);
+      // ctx.fillStyle = "green";
+      // ctx.fill();
+      // ctx.stroke();
+
+      // ctx.beginPath();
+      // ctx.moveTo(82, 390);
+      // ctx.quadraticCurveTo(100, 355, 145, 400);
+      // ctx.fillStyle = "green";
+      // ctx.fill();
+      // ctx.stroke();
+
+
+
+      // ctx.beginPath();
+      // ctx.moveTo(78, 380);
+      // ctx.quadraticCurveTo(135, 350, 155, 385);
+      // ctx.fillStyle = "green";
+      // ctx.fill();
+      // ctx.stroke();
+
+      // ctx.beginPath();
+      // ctx.moveTo(76, 380);
+      // ctx.quadraticCurveTo(95, 320, 160, 340);
+      // ctx.fillStyle = "green";
+      // ctx.fill();
+      // ctx.stroke();
+
+      // ctx.beginPath();
+      // ctx.moveTo(80, 380);
+      // ctx.quadraticCurveTo(78, 320, 25, 320);
+      // ctx.fillStyle = "green";
+      // ctx.fill();
+      // ctx.stroke();
+
+    </script>
+
+
+  </body>
+
+</html>
