@@ -1,0 +1,89 @@
+* {
+    margin: auto;
+}
+
+body {
+
+    background-color: chocolate;
+}
+
+.horse {
+    background: transparent;
+    position: absolute;
+    /* background: url('/photo/horse.gif'); */
+    left: 20px;
+    bottom: 0px;
+    transition: 0.1s;
+    /* animation: horse 70s linear infinite; */
+}
+
+/* @keyframes horse {
+    100% {
+        transform: translateX(1350);
+    }
+} */
+
+.road {
+    height: 17%;
+    width: 1350px;
+    position: absolute;
+    background: url('hroad.jfif');
+    background-repeat: repeat-x;
+    right: 0;
+    bottom: -480px;
+
+
+}
+
+.animal {
+    position: absolute;
+    left: 1000px;
+
+    bottom: 0px;
+
+}
+
+.animal2 {
+    position: absolute;
+    left: 1100px;
+    bottom: 170px;
+
+}
+
+.animal3 {
+    position: absolute;
+    left: 1180px;
+    bottom: 55px;
+
+}
+
+.boy {
+    background: transparent;
+    position: absolute;
+    left: 600px;
+    bottom: -20px;
+}
+
+.tree {
+    position: absolute;
+    left: 30px;
+    bottom: -150px;
+}
+
+.grass {
+    position: absolute;
+    left: 20px;
+    bottom: -370px;
+}
+
+.hen {
+    position: absolute;
+    left: 250px;
+    bottom: -120px;
+}
+
+.plant {
+    position: absolute;
+    left: 1140px;
+    bottom: 20px;
+}
