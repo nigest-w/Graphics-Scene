@@ -9,90 +9,193 @@
 <body>
 
   <body>
-    <canvas id="can" width="1350px" height="900" ;></canvas>
+    <canvas id="can" width="1350px" height="1100"></canvas>
+    <div class="bird">
+      <img src="photo/bird2.gif" width="100px" height="100px">
+    </div>
 
+    <div class="women">
+      <img src="photo/women.gif" width="80px" height="80px">
+    </div>
     <div class="animal">
-      <img src="/photo/cow4.gif" width="120" height="150">
+      <img src="photo/cow4.gif" width="120" height="150">
     </div>
     <div class="animal2">
-      <img src="/photo/cow.gif" width="90px" height="100px">
+      <img src="photo/cow.gif" width="90px" height="100px">
     </div>
     <div class="animal3">
-      <img src="/photo/got.gif" width="80px" height="100">
+      <img src="photo/got.gif" width="80px" height="100">
     </div>
     <div class="boy">
-      <img src="/photo/runnng boy.gif" width="120px" height="150px">
+      <img src="photo/man.gif" width="100px" height="120px">
     </div>
     <div class="tree">
-      <img src="/photo/tree1.gif" width="150px" height="240px">
+      <img src="photo/tree1.gif" width="150px" height="240px">
     </div>
     <div class="hen">
-      <img src="/photo/hen.webp" width="80px" height="90px">
-    </div>
-    <div class="plant">
-      <img src="/photo/grass2.gif" width="80px" height="90px">
+      <img src="photo/hen.webp" width="80px" height="90px">
     </div>
 
     <div class="grass">
-      <img src="/photo/grass.gif" width="180px" height="180px">
-      <img src="/photo/grass.gif" width="180px" height="180px">
-      <img src="/photo/grass.gif" width="180px" height="180px">
-      <img src="/photo/grass.gif" width="180px" height="180px">
-      <img src="/photo/grass.gif" width="180px" height="180px">
-      <img src="/photo/grass.gif" width="180px" height="180px">
-      <img src="/photo/grass.gif" width="180px" height="180px">
+      <img src="photo/grass.gif" width="180px" height="180px">
+      <img src="photo/grass.gif" width="180px" height="180px">
+      <img src="photo/grass.gif" width="180px" height="180px">
+      <img src="photo/grass.gif" width="180px" height="180px">
+      <img src="photo/grass.gif" width="180px" height="180px">
+      <img src="photo/grass.gif" width="180px" height="180px">
+      <img src="photo/grass.gif" width="180px" height="180px">
     </div>
     <div class="road">
 
-      <div id="myHorse" class="horse">
-        <img src="/photo/horse.gif" width="180px" height="200px">
+      <div class="horse" id="horse1">
+        <img src="photo/horse.gif" width="180px" height="200px">
       </div>
     </div>
+
+
     <script>
-      function move_horse(direction) {
-        var horse = document.getElementById("myHorse");
-        var x = parseInt(horse.style.left) || 0;
-        var y = parseInt(horse.style.top) || 0;
-        var distance = 10; // adjust the distance as needed
-        var maxLeft = window.innerWidth - horse.offsetWidth; // calculate the maximum left position
-        if (direction == 'left') {
-          x += distance;
-          if (x > maxLeft) { // if the horse reaches the maximum left position, turn it around
-            x = maxLeft;
-            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(180deg)";
-          } else {
-            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(0deg)";
-          }
+      //code to move the horse
+      const horse = document.querySelector('.horse');
+      let horsePosition = -180;
+      let horseDirection = 1;
+
+      function moveHorse() {
+        horsePosition += 5 * horseDirection;
+        if (horsePosition > 1350) {
+          horseDirection = -1;
+          horse.style.transform = `rotateY(180deg)`;
+        } else if (horsePosition < -180) {
+          horseDirection = 1;
+          horse.style.transform = `rotateY(0deg)`;
         }
-        else if (direction == 'right') {
-          x -= distance;
-          if (x < 0) { // if the horse reaches the minimum left position, turn it around
-            x = 0;
-            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(0deg)";
-          } else {
-            horse.style.transform = "translate(" + x + "px, " + y + "px) rotate(180deg)";
-          }
+        horse.style.left = horsePosition + 'px';
+      }
+
+      setInterval(moveHorse, 50);
+      // code to move the man 
+      const man = document.querySelector('.boy');
+      let manPosition = 320;
+      let manDirection = 1;
+      let isMoving = false;
+      let moveIntervalId;
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'm' && !isMoving) {
+          isMoving = true;
+          man.style.transition = '0s';
+          moveIntervalId = setInterval(moveMan, 180);
+        } else if (event.key === 's' && isMoving) {
+          isMoving = false;
+          clearInterval(moveIntervalId);
+          man.style.transition = '2.5s';
+        }
+      });
+      function moveMan() {
+        manPosition += 10 * manDirection;
+        if (manPosition >= 1300 || manPosition <= 320) {
+          manDirection = -manDirection;
+          man.style.transform = `rotateY(${180 * manDirection}deg)`;
+        }
+        else if (manPosition == 320) {
+          manDirection = -manDirection;
+          man.style.transform = `rotateY(${180 * manDirection}deg)`;
+        }
+        man.style.left = manPosition + 'px';
+      }
+      // code to move the bird 
+
+      const bird = document.querySelector('.bird');
+      let birdPosition = 1350;
+      let birdDirection = 1;
+
+      function moveBird() {
+        birdPosition += 5 * birdDirection;
+        if (birdPosition > 1350) {
+          birdDirection = -1;
+          bird.style.transform = `rotateY(180deg)`;
+        } else if (birdPosition < 0) {
+          birdDirection = 1;
+          bird.style.transform = `rotateY(0deg)`;
+        }
+        bird.style.right = birdPosition + 'px';
+      }
+      setInterval(moveBird, 50);
+
+      // to move cow
+      const cow = document.querySelector('.animal');
+      let cowPosition = 1010;
+      let cowDirection = -1;
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'l' && !isMoving) {
+          isMoving = true;
+          cow.style.transition = '0s';
+          cow.style.transform = 'rotate(0deg)';
+          moveIntervalId = setInterval(function () { moveCow(180); }, 180);
+        }
+      });
+
+      function moveCow(rotationAngle) {
+        cowPosition += 10 * cowDirection;
+        if (cowPosition <= 400 || cowPosition >= 1300) {
+          cowDirection = -cowDirection;
+        }
+        cow.style.left = cowPosition + 'px';
+
+
+        if (cowDirection === -1 && cowPosition >= 400 && cowPosition <= 430) {
+          cow.style.transform = `rotateY(-${rotationAngle}deg)`;
+        } else if (cowDirection === 1 && cowPosition >= 1270 && cowPosition <= 1300) {
+          cow.style.transform = `rotateY(${rotationAngle}deg)`;
+        } else if (cowDirection === -1 && cowPosition < 400) {
+          cow.style.transform = `rotateY(${rotationAngle}deg)`;
+        } else if (cowDirection === 1 && cowPosition > 1300) {
+          cow.style.transform = `rotateY(-${rotationAngle}deg)`;
         }
       }
     </script>
 
+
+    <!-- the script code to draw objects on the canvas  -->
+
     <script type="text/javascript">
       var all = document.getElementById("can");
       var scene = all.getContext("2d");
-
+      //draw sky
       scene.rect(0, 0, 1474, 500);
       scene.fillStyle = "lightblue";
       scene.strokeStyle = "lightblue";
       scene.fill();
       scene.stroke();
-
+      // draw cloud.......1
       scene.beginPath();
       scene.fillStyle = "white";
-      scene.arc(250, 90, 20, 0, 2 * Math.PI);
+      scene.arc(250, 90, 13, 0, 2 * Math.PI);
       scene.fill();
       scene.strokeStyle = "white";
       scene.stroke();
 
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(235, 97, 10, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(264, 97, 10, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(250, 100, 10, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+      //cloud..........2
       scene.beginPath();
       scene.fillStyle = "white";
       scene.arc(360, 70, 30, 0, 2 * Math.PI);
@@ -113,7 +216,7 @@
       scene.fill();
       scene.stroke();
 
-
+      //cloud.........3
       scene.beginPath();
       scene.fillStyle = "white";
       scene.arc(560, 110, 30, 0, 2 * Math.PI);
@@ -133,13 +236,37 @@
       scene.arc(635, 110, 30, 0, 2 * Math.PI);
       scene.fill();
       scene.stroke();
+      //cloud........4
 
       scene.beginPath();
       scene.fillStyle = "white";
-      scene.arc(730, 70, 20, 0, 2 * Math.PI);
+      scene.arc(730, 70, 15, 0, 2 * Math.PI);
       scene.fill();
       scene.strokeStyle = "white";
       scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(710, 80, 15, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(750, 80, 15, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      scene.beginPath();
+      scene.fillStyle = "white";
+      scene.arc(730, 85, 15, 0, 2 * Math.PI);
+      scene.fill();
+      scene.strokeStyle = "white";
+      scene.stroke();
+
+      //darw sun
 
       scene.beginPath();
       scene.fillStyle = "yellow";
@@ -147,6 +274,8 @@
       scene.fill();
       scene.stroke();
 
+
+      //darw mountain
       var all = document.getElementById("can");
       var mount = all.getContext("2d");
 
@@ -172,7 +301,7 @@
       mount.fill();
 
       mount.stroke();
-
+      // draw the green land
       var all = document.getElementById("can");
       var land = all.getContext("2d");
 
@@ -189,11 +318,13 @@
       land.stroke();
 
       land.beginPath();
-      land.rect(0, 500, 1400, 500);
+      land.rect(0, 450, 1400, 500);
       land.fillStyle = "green";
       land.fill();
       land.stroke();
 
+      //house one
+      //draw roof
       land.beginPath();
       land.fillStyle = "#873e23";
       land.lineWidth = "1";
@@ -202,12 +333,12 @@
       land.lineTo(250, 450);
       land.lineTo(380, 550);
       land.fill();
-
+      // daraw wall 
       land.beginPath();
       land.rect(130, 550, 220, 120);
       land.fillStyle = "#f9d589";
       land.fill();
-
+      // draw door
       land.beginPath();
       land.rect(215, 610, 50, 60);
       land.fillStyle = "black";
@@ -218,22 +349,51 @@
       land.fillStyle = "red";
       land.fill();
       land.stroke();
+      // house two
+      //draw roof
+      land.beginPath();
+      land.fillStyle = "#873e23";
+      land.lineWidth = "1";
+      land.strokeStyle = "black";
+      land.moveTo(850, 350);
+      land.lineTo(900, 280);
+      land.lineTo(950, 350);
+      land.fill();
+      // daraw wall 
+      land.beginPath();
+      land.rect(860, 350, 80, 55);
+      land.fillStyle = "#f9d589";
+      land.fill();
+      // draw door
+      land.beginPath();
+      land.rect(885, 375, 25, 30);
+      land.fillStyle = "black";
+      land.fill();
 
+      land.beginPath();
+      land.arc(905, 390, 3, 0, 2 * Math.PI);
+      land.fillStyle = "red";
+      land.fill();
+      land.stroke();
 
+      // the land part
       land.beginPath();
       land.rect(0, 950, 1300, 200);
       land.fillStyle = "#d96630";
       land.strokeStyle = "#d96630";
       land.fill();
       land.stroke();
+
+
+      // draw tree
       var canvas = document.getElementById("can");
       var ctx = canvas.getContext("2d");
 
       ctx.beginPath();
-      ctx.moveTo(775, 500);
-      ctx.lineTo(775, 380);
-      ctx.lineTo(783, 380);
-      ctx.lineTo(787, 500);
+      ctx.moveTo(788, 390);
+      ctx.lineTo(788, 310);
+      ctx.lineTo(796, 310);
+      ctx.lineTo(800, 390);
       ctx.closePath();
       ctx.fillStyle = "#e95d2a ";
       ctx.fill();
@@ -241,138 +401,216 @@
 
 
       ctx.beginPath();
-      ctx.moveTo(75, 380);
-      ctx.quadraticCurveTo(65, 350, 10, 340);
+      ctx.moveTo(785, 310);
+      ctx.strokeStyle = "green";
+      ctx.quadraticCurveTo(785, 270, 750, 340);
       ctx.fillStyle = "green";
       ctx.fill();
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(72, 380);
-      ctx.quadraticCurveTo(45, 370, 10, 340);
+      ctx.moveTo(790, 310);
+      ctx.quadraticCurveTo(785, 260, 710, 320);
       ctx.fillStyle = "green";
       ctx.fill();
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(72, 380);
-      ctx.quadraticCurveTo(45, 370, 10, 340);
+      ctx.moveTo(795, 300);
+      ctx.quadraticCurveTo(785, 250, 710, 270);
       ctx.fillStyle = "";
       ctx.fill();
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(72, 385);
-      ctx.quadraticCurveTo(35, 355, 10, 395);
+      ctx.moveTo(840, 330);
+      ctx.quadraticCurveTo(785, 265, 790, 310);
       ctx.fillStyle = "green";
       ctx.fill();
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(82, 390);
-      ctx.quadraticCurveTo(100, 355, 145, 400);
-      ctx.fillStyle = "green";
-      ctx.fill();
-      ctx.stroke();
-
-
-
-      ctx.beginPath();
-      ctx.moveTo(78, 380);
-      ctx.quadraticCurveTo(135, 350, 155, 385);
+      ctx.moveTo(870, 320);
+      ctx.quadraticCurveTo(820, 255, 770, 300);
       ctx.fillStyle = "green";
       ctx.fill();
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(76, 380);
-      ctx.quadraticCurveTo(95, 320, 160, 340);
+      ctx.moveTo(860, 270);
+      ctx.quadraticCurveTo(830, 240, 785, 290);
       ctx.fillStyle = "green";
       ctx.fill();
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(80, 380);
-      ctx.quadraticCurveTo(78, 320, 25, 320);
+      ctx.moveTo(750, 225);
+      ctx.quadraticCurveTo(815, 265, 783, 290);
       ctx.fillStyle = "green";
       ctx.fill();
       ctx.stroke();
 
-      // var canvas = document.getElementById("can");
-      // var ctx = canvas.getContext("2d");
+      ctx.beginPath();
+      ctx.moveTo(835, 225);
+      ctx.quadraticCurveTo(765, 265, 795, 290);
+      ctx.fillStyle = "green";
+      ctx.fill();
+      ctx.stroke();
 
-      // ctx.beginPath();
-      // ctx.moveTo(75, 500);
-      // ctx.lineTo(75, 380);
-      // ctx.lineTo(83, 380);
-      // ctx.lineTo(87, 500);
-      // ctx.closePath();
-      // ctx.fillStyle = "#e95d2a ";
-      // ctx.fill();
-      // ctx.stroke();
+      // cows house
+
+      //black line
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(398, 420);
+      ctx.lineTo(543, 398);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(398, 435);
+      ctx.lineTo(543, 415);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(535, 410);
+      ctx.lineTo(620, 495);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(535, 390);
+      ctx.lineTo(620, 475);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(395, 445);
+      ctx.lineTo(443, 530);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(393, 418);
+      ctx.lineTo(445, 500);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(445, 518);
+      ctx.lineTo(492, 513);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = "3";
+      ctx.fillStyle = "black";
+      ctx.moveTo(445, 500);
+      ctx.lineTo(492, 495);
+      ctx.stroke();
 
 
-      // ctx.beginPath();
-      // ctx.moveTo(75, 380);
-      // ctx.quadraticCurveTo(65, 350, 10, 340);
-      // ctx.fillStyle = "green";
-      // ctx.fill();
-      // ctx.stroke();
+      //first row
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(400, 410);
+      ctx.rect(400, 410, 10, 45);
+      ctx.fill();
 
-      // ctx.beginPath();
-      // ctx.moveTo(72, 380);
-      // ctx.quadraticCurveTo(45, 370, 10, 340);
-      // ctx.fillStyle = "green";
-      // ctx.fill();
-      // ctx.stroke();
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(440, 405);
+      ctx.rect(440, 405, 10, 45);
+      ctx.fill();
 
-      // ctx.beginPath();
-      // ctx.moveTo(72, 380);
-      // ctx.quadraticCurveTo(45, 370, 10, 340);
-      // ctx.fillStyle = "";
-      // ctx.fill();
-      // ctx.stroke();
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(470, 400);
+      ctx.rect(470, 400, 10, 45);
+      ctx.fill();
 
-      // ctx.beginPath();
-      // ctx.moveTo(72, 385);
-      // ctx.quadraticCurveTo(35, 355, 10, 395);
-      // ctx.fillStyle = "green";
-      // ctx.fill();
-      // ctx.stroke();
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(500, 395);
+      ctx.rect(500, 395, 10, 45);
+      ctx.fill();
 
-      // ctx.beginPath();
-      // ctx.moveTo(82, 390);
-      // ctx.quadraticCurveTo(100, 355, 145, 400);
-      // ctx.fillStyle = "green";
-      // ctx.fill();
-      // ctx.stroke();
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(530, 390);
+      ctx.rect(530, 390, 10, 45);
+      ctx.fill();
+      //second 
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(410, 430);
+      ctx.rect(410, 430, 10, 45);
+      ctx.fill();
 
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(425, 460);
+      ctx.rect(425, 460, 10, 45);
+      ctx.fill();
 
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(440, 485);
+      ctx.rect(440, 485, 10, 45);
+      ctx.fill();
 
-      // ctx.beginPath();
-      // ctx.moveTo(78, 380);
-      // ctx.quadraticCurveTo(135, 350, 155, 385);
-      // ctx.fillStyle = "green";
-      // ctx.fill();
-      // ctx.stroke();
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(480, 475);
+      ctx.rect(480, 480, 10, 45);
+      ctx.fill();
+      //third
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(560, 410);
+      ctx.rect(560, 410, 10, 45);
+      ctx.fill();
 
-      // ctx.beginPath();
-      // ctx.moveTo(76, 380);
-      // ctx.quadraticCurveTo(95, 320, 160, 340);
-      // ctx.fillStyle = "green";
-      // ctx.fill();
-      // ctx.stroke();
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(585, 440);
+      ctx.rect(585, 440, 10, 45);
+      ctx.fill();
 
-      // ctx.beginPath();
-      // ctx.moveTo(80, 380);
-      // ctx.quadraticCurveTo(78, 320, 25, 320);
-      // ctx.fillStyle = "green";
-      // ctx.fill();
-      // ctx.stroke();
-
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      ctx.fillStyle = "white";
+      ctx.moveTo(610, 455);
+      ctx.rect(610, 460, 7, 45);
+      ctx.fill();
+      ctx.stroke();
     </script>
-
-
   </body>
 
 </html>
